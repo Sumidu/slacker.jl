@@ -6,7 +6,6 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/sumidu/Slacker.jl?svg=true)](https://ci.appveyor.com/project/sumidu/Slacker-jl)
 [![Codecov](https://codecov.io/gh/sumidu/Slacker.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/sumidu/Slacker.jl)
 [![Coveralls](https://coveralls.io/repos/github/sumidu/Slacker.jl/badge.svg?branch=master)](https://coveralls.io/github/sumidu/Slacker.jl?branch=master)
-[![Build Status](https://api.cirrus-ci.com/github/sumidu/Slacker.jl.svg)](https://cirrus-ci.com/github/sumidu/Slacker.jl)
 
 A package that allows sending to slack. It uses a configuration file stored in the home directory of the user.
 It allows for multiple named configurations, if several slack servers are used.
