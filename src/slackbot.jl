@@ -126,6 +126,12 @@ function sendSlackMessage(text, config::SlackConfig)
     end
 end
 
+
+"""
+    sendSlackMessage(text, cfg::String = "default")
+
+Sends a message to the configured default slack server or the one specified in `cfg`.
+"""
 function sendSlackMessage(text, cfg::String = "default")
     config = loadConfig(cfg)
     sendSlackMessage(text, config)
