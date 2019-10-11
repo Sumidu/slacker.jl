@@ -57,7 +57,7 @@ function addConfig(config::SlackConfig, name::String = "default")
         @debug "File exists."
         configs = readSettingsFile()
         if haskey(configs,name)
-            @info "Key Exists"
+            @debug "Key Exists"
         else
             configs[name] = config
             @debug "Append Key"
@@ -107,8 +107,7 @@ function loadConfig(name="default")
 end
 
 
-addConfig(SlackConfig())
-loadConfig()
+
 
 
 
