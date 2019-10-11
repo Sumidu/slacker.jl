@@ -13,5 +13,5 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/sumidu/Slacker.jl",
+    repo="github.com/Sumidu/slacker.jl",
 )
