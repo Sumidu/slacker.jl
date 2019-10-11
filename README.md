@@ -13,13 +13,13 @@ It allows for multiple named configurations, if several slack servers are used.
 
 ## Installation
 
-```
+```julia
 using Pkg
 Pkg.dev("http://github.com/sumidu/slacker.jl")
 ```
 
 ## Usage
-```{julia}
+```julia
   using Slacker
 
   # replace the url with your incoming Webhook URL
@@ -34,7 +34,7 @@ Pkg.dev("http://github.com/sumidu/slacker.jl")
 ## Using Multiple Servers
 
 
-```
+```julia
   using Slacker
 
   cfg1 = SlackConfig("url1", "JuliaBot", "#general", ":ghost:")
@@ -50,7 +50,7 @@ Pkg.dev("http://github.com/sumidu/slacker.jl")
 
 ## Changing the channel or Username of a configuration temporarily
 
-```
+```julia
   using Slacker
 
   cfg = loadConfig("server1")
