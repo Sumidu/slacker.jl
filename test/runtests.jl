@@ -31,7 +31,7 @@ end
 
 @testset "Slacker.jl" begin
 
-
+    # ensure existing configuration is not overridden
     backup()
     addConfig(SlackConfig(), "testConfig")
     @test isfile(getSettingsFile())
@@ -50,8 +50,13 @@ end
     @test conf2.channel == "channel"
     @test conf2.icon_emoji == "icon"
 
-    removeConfigFile()
 
+    #@test_warn "Overwriting exisiting configuration." addConfig(SlackConfig("webhook", "name2", "channel2", "icon2"), "testConfig2")
+    conf2 = loadConfig("testConfig2")
+
+
+    removeConfigFile()
     @test !isfile(getSettingsFile())
+
     restore()
 end

@@ -4,6 +4,6 @@ using HTTP, JSON
 
 include("slackbot.jl")
 
-export SlackConfig, addConfig, loadConfig, removeConfigFile
+export SlackConfig, addConfig, loadConfig, sendSlackMessage, removeConfigFile
 
 end # module

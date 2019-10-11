@@ -1,4 +1,10 @@
-# This sends a message to slack
+# This contains the main slacker program
+
+const INIT_ERROR_MSG = "Settings file not found. Please create a settings file using `addConfig(name)`."
+const KEY_NOT_FOUND_ERROR_MSG = "No configuration found for this name. Please add using `addConfig(name)`"
+
+
+# A structure that contains a configuration for an incoming webhook on slack
 mutable struct SlackConfig
     webhook_url:: String
     user:: String
@@ -19,24 +25,25 @@ mutable struct SlackConfig
 end
 
 
+
 function getSettingsFile()
     joinpath(homedir(), ".slacker_config.json")
 end
 
 
-const INIT_ERROR_MSG = "Settings file not found. Please create a settings file using `addConfig(name)`."
-const KEY_NOT_FOUND_ERROR_MSG = "No configuration found for this name. Please add using `addConfig(name)`"
 
-
+# read all settings
 function readSettingsFile()
     fn = getSettingsFile()
     isfile(fn) || error(INIT_ERROR_MSG)
     dic = Dict{String, SlackConfig}()
 
+    # read file
     str = open(fn) do file
         read(file, String)
     end
 
+    # parse json to Dict
     res = JSON.parse(str)
     for entry in res
         val = SlackConfig(entry[2])
@@ -47,7 +54,7 @@ end
 
 
 
-
+# add a configuration to registry
 function addConfig(config::SlackConfig, name::String = "default")
     fn = getSettingsFile()
     dic = Dict(name => config)
@@ -57,7 +64,11 @@ function addConfig(config::SlackConfig, name::String = "default")
         @debug "File exists."
         configs = readSettingsFile()
         if haskey(configs,name)
-            @debug "Key Exists"
+            @warn "Overwriting exisiting configuration."
+            configs[name] = config
+            open(fn, write = true) do file
+                write(file, JSON.json(configs))
+            end
         else
             configs[name] = config
             @debug "Append Key"
@@ -73,6 +84,7 @@ function addConfig(config::SlackConfig, name::String = "default")
     end
 end
 
+# delete the registry
 function removeConfigFile()
     fn = getSettingsFile()
     if isfile(fn)
@@ -81,21 +93,8 @@ function removeConfigFile()
 end
 
 
-function removeConfig(name = "default")
-    error("NOT IMPLEMENTED")
-    fn = getSettingsFile()
-    if isfile(fn)
-        rm(fn)
-    end
-end
 
-
-function registerSlackHook(webhook_url::String, name::String = "default")
-    config = SlackConfig()
-    config.webhook_url = webhook_url
-    addConfig(config, name)
-end
-
+# load a specific config from the registry
 function loadConfig(name="default")
     settings = readSettingsFile()
     if haskey(settings, name)
@@ -107,24 +106,34 @@ function loadConfig(name="default")
 end
 
 
-
-
-
-
-
-
-function sendSlackMessage(channel, text; username = "JuliaBot", icon_emoji = ":ghost:")
-    error("NOT IMPLEMENTED")
+#send message to slack using a config name
+function sendSlackMessage(text, config::SlackConfig)
     a = Dict(
-        "channel" => channel,
-        "username" => username,
+        "channel" => config.channel,
+        "username" => config.user,
         "text" => text,
-        "icon_emoji" => icon_emoji)
+        "icon_emoji" => config.icon_emoji)
 
-    message = "payload=" * json(a)
-    webhook = getWebHookURL()
-    HTTP.request("POST",
-        webhook,
-        ["Content-Type" => "application/x-www-form-urlencoded"], message;
-        verbose = 0)
+    message = "payload=" * JSON.json(a)
+    webhook = config.webhook_url
+    try
+        resp = HTTP.request("POST",
+            webhook,
+            ["Content-Type" => "application/x-www-form-urlencoded"], message;
+            verbose = 0)
+    catch e
+        @warn "Could not send message $e"
+    end
+end
+
+function sendSlackMessage(text, cfg::String = "default")
+    config = loadConfig(cfg)
+    sendSlackMessage(text, config)
+end
+
+
+#TODO
+
+function removeConfig(name = "default")
+    error("NOT IMPLEMENTED")
 end
