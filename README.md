@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.com/sumidu/slacker.jl.svg?branch=master)](https://travis-ci.com/sumidu/slacker.jl)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/sumidu/slacker.jl?svg=true)](https://ci.appveyor.com/project/sumidu/slacker-jl)
 [![Codecov](https://codecov.io/gh/sumidu/slacker.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/sumidu/slacker.jl)
-[![Coveralls](https://coveralls.io/repos/github/sumidu/slacker.jl/badge.svg?branch=master)](https://coveralls.io/github/sumidu/slacker.jl?branch=master)
+[![Coveralls](https://coveralls.io/repos/github/Sumidu/slacker.jl/badge.svg?branch=master)](https://coveralls.io/github/Sumidu/slacker.jl?branch=master)
 
 A package that allows sending to slack. It uses a configuration file stored in the home directory of the user.
 It allows for multiple named configurations, if several slack servers are used.
