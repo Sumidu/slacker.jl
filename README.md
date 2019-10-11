@@ -9,9 +9,18 @@
 [![Build Status](https://api.cirrus-ci.com/github/sumidu/Slacker.jl.svg)](https://cirrus-ci.com/github/sumidu/Slacker.jl)
 
 A package that allows sending to slack. It uses a configuration file stored in the home directory of the user.
-It allows for multiple name configurations, if several slack servers are used.
+It allows for multiple named configurations, if several slack servers are used.
+
+
+## Installation
 
 ```
+using Pkg
+Pkg.dev("http://github.com/sumidu/slacker.jl")
+```
+
+## Usage
+```{julia}
   using Slacker
 
   # replace the url with your incoming Webhook URL
@@ -23,7 +32,7 @@ It allows for multiple name configurations, if several slack servers are used.
 
 ```
 
-Using Multiple servers
+## Using Multiple Servers
 
 
 ```
@@ -40,7 +49,7 @@ Using Multiple servers
 
 ```
 
-Changing the channel or Username of a configuration temporarily
+## Changing the channel or Username of a configuration temporarily
 
 ```
   using Slacker
