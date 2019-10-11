@@ -2,10 +2,10 @@
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://sumidu.github.io/slacker.jl/stable)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://sumidu.github.io/slacker.jl/dev)
-[![Build Status](https://travis-ci.com/sumidu/Slacker.jl.svg?branch=master)](https://travis-ci.com/sumidu/Slacker.jl)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/sumidu/Slacker.jl?svg=true)](https://ci.appveyor.com/project/sumidu/Slacker-jl)
-[![Codecov](https://codecov.io/gh/sumidu/Slacker.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/sumidu/Slacker.jl)
-[![Coveralls](https://coveralls.io/repos/github/sumidu/Slacker.jl/badge.svg?branch=master)](https://coveralls.io/github/sumidu/Slacker.jl?branch=master)
+[![Build Status](https://travis-ci.com/sumidu/slacker.jl.svg?branch=master)](https://travis-ci.com/sumidu/slacker.jl)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/sumidu/slacker.jl?svg=true)](https://ci.appveyor.com/project/sumidu/slacker-jl)
+[![Codecov](https://codecov.io/gh/sumidu/slacker.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/sumidu/slacker.jl)
+[![Coveralls](https://coveralls.io/repos/github/sumidu/slacker.jl/badge.svg?branch=master)](https://coveralls.io/github/sumidu/slacker.jl?branch=master)
 
 A package that allows sending to slack. It uses a configuration file stored in the home directory of the user.
 It allows for multiple named configurations, if several slack servers are used.
