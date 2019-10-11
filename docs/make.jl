@@ -6,8 +6,8 @@ makedocs(;
     pages=[
         "Home" => "index.md",
     ],
-    repo="https://github.com/sumidu/Slacker.jl/blob/{commit}{path}#L{line}",
-    sitename="Slacker.jl",
+    repo="https://github.com/Sumidu/slacker.jl/blob/{commit}{path}#L{line}",
+    sitename="slacker.jl",
     authors="André Calero Valdez",
     assets=String[],
 )
