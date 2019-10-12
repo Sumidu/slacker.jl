@@ -33,8 +33,6 @@ end
 
 
 """
-    readSettingsFile()
-
 Load the registry and return all registered servers as a Dict.
 """
 function readSettingsFile()
@@ -59,10 +57,14 @@ end
 
 
 """
-    addConfig(config::SlackConfig, name::String = "default")
-
 Add a Slack server configuration to the registry. Multiple servers can be
 defined by adjusting the `name` parameter.
+
+# Examples
+```julia-repl
+julia> addConfig(SlackConfig("server.url", "username", "#channel", ":smile:"))
+1
+```
 """
 function addConfig(config::SlackConfig, name::String = "default")
     fn = getSettingsFile()
@@ -94,8 +96,6 @@ function addConfig(config::SlackConfig, name::String = "default")
 end
 
 """
-    removeConfigFile()
-
 Deletes the whole registry from the computer.
 """
 function removeConfigFile()
@@ -108,8 +108,6 @@ end
 
 
 """
-    loadConfig(name="default")
-
 Load the default configuration from the registry. Other configurations may be loaded
 by specifying the `name` parameter.
 """
@@ -124,8 +122,6 @@ function loadConfig(name="default")
 end
 
 """
-    sendSlackMessage(text, cfg::SlackConfig)
-
 Sends a message `text`to Server defined in the configuration `cfg`.
 """
 function sendSlackMessage(text, config::SlackConfig)
@@ -149,8 +145,6 @@ end
 
 
 """
-    sendSlackMessage(text, cfg::String = "default")
-
 Sends a message `text`to the configured default slack server or the one specified in `cfg`.
 """
 function sendSlackMessage(text, cfg::String = "default")
