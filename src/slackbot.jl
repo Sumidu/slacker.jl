@@ -18,6 +18,15 @@ mutable struct SlackConfig
         SlackConfig(dic["webhook_url"], dic["user"], dic["channel"], dic["icon_emoji"])
     end
 
+    """
+    ...
+    # Arguments
+    - `webhook_url::String`: the incoming webhook_url
+    - `user::String`: the name of the user Slacker should have in slack.
+    - `channel::String`: the channel Slacker should post to. Allows channel with # and direc messages using @.
+    - `icon_emoji::String` : the icon the user should have when posting. By adding a custom emoji e.g. :juliabot: you can easily give julia its own avatar.
+    ...
+    """
     function SlackConfig(webhook_url, user, channel, icon_emoji)
         new(webhook_url, user, channel, icon_emoji)
     end
