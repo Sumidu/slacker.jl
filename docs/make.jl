@@ -5,6 +5,7 @@ makedocs(;
     format=Documenter.HTML(),
     pages=[
         "Home" => "index.md",
+        "Tutorial" = "tutorial.md",
     ],
     repo="https://github.com/Sumidu/slacker.jl/blob/{commit}{path}#L{line}",
     sitename="slacker.jl",
