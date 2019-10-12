@@ -60,3 +60,9 @@ end
 
     restore()
 end
+
+
+
+#TODO Test overwriting of file?
+# Loadconfig not found error
+# sending... figure out how :D
