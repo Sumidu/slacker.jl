@@ -32,7 +32,11 @@ end
 
 
 
-# read all settings
+"""
+    readSettingsFile()
+
+Load the registry and return all registered servers as a Dict.
+"""
 function readSettingsFile()
     fn = getSettingsFile()
     isfile(fn) || error(INIT_ERROR_MSG)
@@ -54,7 +58,12 @@ end
 
 
 
-# add a configuration to registry
+"""
+    addConfig(config::SlackConfig, name::String = "default")
+
+Add a Slack server configuration to the registry. Multiple servers can be
+defined by adjusting the `name` parameter.
+"""
 function addConfig(config::SlackConfig, name::String = "default")
     fn = getSettingsFile()
     dic = Dict(name => config)
@@ -84,7 +93,11 @@ function addConfig(config::SlackConfig, name::String = "default")
     end
 end
 
-# delete the registry
+"""
+    removeConfigFile()
+
+Deletes the whole registry from the computer.
+"""
 function removeConfigFile()
     fn = getSettingsFile()
     if isfile(fn)
@@ -94,7 +107,12 @@ end
 
 
 
-# load a specific config from the registry
+"""
+    loadConfig(name="default")
+
+Load the default configuration from the registry. Other configurations may be loaded
+by specifying the `name` parameter.
+"""
 function loadConfig(name="default")
     settings = readSettingsFile()
     if haskey(settings, name)
@@ -105,8 +123,11 @@ function loadConfig(name="default")
 
 end
 
+"""
+    sendSlackMessage(text, cfg::SlackConfig)
 
-#send message to slack using a config name
+Sends a message `text`to Server defined in the configuration `cfg`.
+"""
 function sendSlackMessage(text, config::SlackConfig)
     a = Dict(
         "channel" => config.channel,
@@ -130,7 +151,7 @@ end
 """
     sendSlackMessage(text, cfg::String = "default")
 
-Sends a message to the configured default slack server or the one specified in `cfg`.
+Sends a message `text`to the configured default slack server or the one specified in `cfg`.
 """
 function sendSlackMessage(text, cfg::String = "default")
     config = loadConfig(cfg)
