@@ -10,7 +10,7 @@ makedocs(;
     repo="https://github.com/Sumidu/slacker.jl/blob/{commit}{path}#L{line}",
     sitename="slacker.jl",
     authors="André Calero Valdez",
-    format = Documenter.HTML(assets = []),
+    assets=String[],
 )
 
 deploydocs(;
