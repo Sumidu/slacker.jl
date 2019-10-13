@@ -5,12 +5,12 @@ makedocs(;
     format=Documenter.HTML(),
     pages=[
         "Home" => "index.md",
-        "Tutorial" = "tutorial.md",
+        "Tutorial" => "tutorial.md",
     ],
     repo="https://github.com/Sumidu/slacker.jl/blob/{commit}{path}#L{line}",
     sitename="slacker.jl",
     authors="André Calero Valdez",
-    assets=String[],
+    format = Documenter.HTML(assets = []),
 )
 
 deploydocs(;
