@@ -53,11 +53,28 @@ However, this is only useful for testing purposes.
 **Avoid storing your webhook url in your code** as clear text. This will expose your slack.
 
 ### Storing multiple servers in your registry.
-The registry system
+The registry system works very simply. You can create as many server configurations as you like.
+The only requirement is that they have a unique name when registering them using the
+`addConfig` function.
+
 
 ## Sending message to slack
+There are two ways of sending a message to slack. The first way is by sending a text
+to the `sendSlackMessage` function
 
+```julia
+  sendSlackMessage("Hi this is Slacker.jl")
+```
 
+This will send a message to the server stored as the `"default"` configuration.
+By adding additional servers to the registry you can send to those as easily.
+
+```julia
+  sendSlackMessage("Hi this is Slacker.jl", "MySlack")
+```
+
+The second parameter accepts both a `String` identifier from the registry, as well
+as a `SlackConfig` object created temporarily.
 
 ## Removing Slacker from your computer.
 
