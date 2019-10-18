@@ -2,8 +2,8 @@
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://sumidu.github.io/slacker.jl/stable)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://sumidu.github.io/slacker.jl/dev)
-[![Build Status](https://travis-ci.com/sumidu/slacker.jl.svg?branch=master)](https://travis-ci.com/sumidu/slacker.jl)
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/sumidu/slacker.jl?svg=true)](https://ci.appveyor.com/project/sumidu/slacker-jl)
+[![Mac/Linux](https://travis-ci.com/sumidu/slacker.jl.svg?branch=master)](https://travis-ci.com/sumidu/slacker.jl)
+[![Windows](https://ci.appveyor.com/api/projects/status/github/sumidu/slacker.jl?svg=true)](https://ci.appveyor.com/project/sumidu/slacker-jl)
 [![Codecov](https://codecov.io/gh/sumidu/slacker.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/sumidu/slacker.jl)
 [![Coveralls](https://coveralls.io/repos/github/Sumidu/slacker.jl/badge.svg?branch=master)](https://coveralls.io/github/Sumidu/slacker.jl?branch=master)
 
@@ -15,7 +15,7 @@ It allows for multiple named configurations, if several slack servers are used.
 
 ```julia
 using Pkg
-Pkg.dev("http://github.com/sumidu/slacker.jl")
+Pkg.add("Slacker")
 ```
 
 ## Usage
