@@ -16,7 +16,7 @@ First, go to the Julia REPL and install Slacker by calling the following:
 
 ```julia
 using Pkg
-Pkg.dev("http://www.github.com/Sumidu/slacker.jl")
+Pkg.add("Slacker")
 ```
 This should install the slacker package to your main workspace. Next you can setup slacker.
 The most simple solution (if you only need one Slack server) is to set the default configuration
