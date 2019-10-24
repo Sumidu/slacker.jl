@@ -64,6 +64,20 @@ function readConfigFile()
 end
 
 
+"""
+Add a Slack server configuration to the registry. Shorthand to create a
+ configuration that posts to the random channel (uses Juliabot and :ghost:
+ as defaults).
+
+# Examples
+```julia-repl
+julia> addConfig("server.url", "config_name")
+```
+"""
+function addConfig(webhook_url::String, name::String)
+    cfg = SlackConfig(webhook_url, "Juliabot", "#random",":ghost:")
+    addConfig(cfg, name)
+end
 
 """
 Add a Slack server configuration to the registry. Multiple servers can be
@@ -72,7 +86,6 @@ defined by adjusting the `name` parameter.
 # Examples
 ```julia-repl
 julia> addConfig(SlackConfig("server.url", "username", "#channel", ":smile:"))
-1
 ```
 """
 function addConfig(config::SlackConfig, name::String = "default")
@@ -165,13 +178,34 @@ end
 """
 Tests whether a configuration exists
 """
-function hasConfig()
+function hasConfig(name = "default")
     fn = getConfigFile()
-    return isfile(fn)
+    if isfile(fn)
+        dic = readConfigFile()
+        if haskey(dic, name)
+            return true
+        end
+    end
+    false
 end
 
-#TODO
 
-function removeConfig(name = "default")
-    error("NOT IMPLEMENTED")
+"""
+removes an individual configuration
+call with parameter "default" to delete the default configuration
+"""
+function removeConfig(name)
+    #helps debugging
+    #name = "default"
+    fn = getConfigFile()
+    dic = readConfigFile()
+    if haskey(dic, name)
+        cfg = pop!(dic, name)
+    end
+    # helps for debugging
+    #dic[name] = cfg
+    open(fn, write = true) do file
+        write(file, JSON.json(dic))
+    end
+    "Configuration $name removed."
 end

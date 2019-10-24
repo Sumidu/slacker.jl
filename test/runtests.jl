@@ -1,5 +1,7 @@
 using Slacker
 using Test
+using HTTP
+using JSON
 
 import Slacker.getConfigFile
 
@@ -21,7 +23,7 @@ function restore()
 end
 
 
-@testset "SlackConfigs" begin
+@testset "SlackConfig Constructors" begin
 
     # does blank object instantiation work?
     @test isa(SlackConfig(), SlackConfig)
@@ -29,7 +31,7 @@ end
 
 end
 
-@testset "Slacker.jl" begin
+@testset "Creating and writing Config Files" begin
 
     # ensure existing configuration is not overridden
     backup()
@@ -57,8 +59,35 @@ end
 
     removeConfigFile()
     @test !isfile(getConfigFile())
-
     restore()
+
+end
+
+@testset "Removing Configs" begin
+    addConfig("DUMMY_URL", "testConfig3")
+    @test hasConfig("testConfig3") == true
+    removeConfig("testConfig3")
+    @test hasConfig("testConfig3") == false
+
+end
+
+@testset "Sending Messages" begin
+    message = "This is a complicated Test Message. :smile:"
+    addConfig("https://postman-echo.com/post", "echo_config")
+    res = sendMessage(message, "echo_config")
+    @test res.status==200
+    @test res.headers[1][1]=="Content-Type"
+    @test res.headers[1][2]=="application/json; charset=utf-8"
+    body = String(res.body)
+    dic = JSON.parse(body)
+    content = JSON.parse(dic["json"]["payload"])
+    @test content["channel"] == "#random"
+    @test content["username"] == "Juliabot"
+    @test content["icon_emoji"] == ":ghost:"
+    @test content["text"] == message
+    removeConfig("echo_config")
+    @test hasConfig("echo_config") == false
+
 end
 
 
