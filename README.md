@@ -10,6 +10,7 @@
 A package that allows sending to slack. It uses a configuration file stored in the home directory of the user.
 It allows for multiple named configurations, if several slack servers are used.
 
+*NOTE* Version 1.0 breaks compatibility with earlier versions.
 
 ## Installation
 
@@ -27,7 +28,7 @@ Pkg.add("Slacker")
 
   addConfig(cfg)
 
-  sendSlackMessage("Hi this is a Test from Slacker.")
+  sendMessage("Hi this is a Test from Slacker.")
 
 ```
 
@@ -43,12 +44,12 @@ Pkg.add("Slacker")
   addConfig(cfg, "server1")
   addConfig(cfg, "server2")
 
-  sendSlackMessage("Hi this is a Test from Slacker to server1.", "server1")
-  sendSlackMessage("Hi this is a Test from Slacker to server1.", "server2")
+  sendMessage("Hi this is a Test from Slacker to server1.", "server1")
+  sendMessage("Hi this is a Test from Slacker to server1.", "server2")
 
 ```
 
-## Changing the channel or Username of a configuration temporarily
+## Changing the channel or username of a configuration temporarily
 
 ```julia
   using Slacker
@@ -58,5 +59,5 @@ Pkg.add("Slacker")
   cfg.user = "Julia Random Bot"
   cfg.icon_emoji = ":grinning:"
 
-  sendSlackMessage("Hi this is a Test from Slacker to server1.", cfg)
+  sendMessage("Hi this is a Test from Slacker to server1.", cfg)
 ```

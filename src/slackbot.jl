@@ -1,6 +1,6 @@
 # This contains the main slacker program
 
-const INIT_ERROR_MSG = "Settings file not found. Please create a settings file using `addConfig(name)`."
+const INIT_ERROR_MSG = "Config file not found. Please create a settings file using `addConfig(name)`."
 const KEY_NOT_FOUND_ERROR_MSG = "No configuration found for this name. Please add using `addConfig(name)`"
 
 
@@ -35,7 +35,7 @@ end
 
 
 
-function getSettingsFile()
+function getConfigFile()
     joinpath(homedir(), ".slacker_config.json")
 end
 
@@ -44,8 +44,8 @@ end
 """
 Load the registry and return all registered servers as a Dict.
 """
-function readSettingsFile()
-    fn = getSettingsFile()
+function readConfigFile()
+    fn = getConfigFile()
     isfile(fn) || error(INIT_ERROR_MSG)
     dic = Dict{String, SlackConfig}()
 
@@ -76,13 +76,13 @@ julia> addConfig(SlackConfig("server.url", "username", "#channel", ":smile:"))
 ```
 """
 function addConfig(config::SlackConfig, name::String = "default")
-    fn = getSettingsFile()
+    fn = getConfigFile()
     dic = Dict(name => config)
     js = JSON.json(dic)
 
     if isfile(fn)
         @debug "File exists."
-        configs = readSettingsFile()
+        configs = readConfigFile()
         if haskey(configs,name)
             @warn "Overwriting exisiting configuration."
             configs[name] = config
@@ -108,7 +108,7 @@ end
 Deletes the whole registry from the computer.
 """
 function removeConfigFile()
-    fn = getSettingsFile()
+    fn = getConfigFile()
     if isfile(fn)
         rm(fn)
     end
@@ -121,7 +121,7 @@ Load the default configuration from the registry. Other configurations may be lo
 by specifying the `name` parameter.
 """
 function loadConfig(name="default")
-    settings = readSettingsFile()
+    settings = readConfigFile()
     if haskey(settings, name)
         return settings[name]
     else
@@ -133,7 +133,7 @@ end
 """
 Sends a message `text`to Server defined in the configuration `cfg`.
 """
-function sendSlackMessage(text, config::SlackConfig)
+function sendMessage(text, config::SlackConfig)
     a = Dict(
         "channel" => config.channel,
         "username" => config.user,
@@ -156,11 +156,19 @@ end
 """
 Sends a message `text`to the configured default slack server or the one specified in `cfg`.
 """
-function sendSlackMessage(text, cfg::String = "default")
+function sendMessage(text, cfg::String = "default")
     config = loadConfig(cfg)
-    sendSlackMessage(text, config)
+    sendMessage(text, config)
 end
 
+
+"""
+Tests whether a configuration exists
+"""
+function hasConfig()
+    fn = getConfigFile()
+    return isfile(fn)
+end
 
 #TODO
 

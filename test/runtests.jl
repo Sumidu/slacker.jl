@@ -1,10 +1,10 @@
 using Slacker
 using Test
 
-import Slacker.getSettingsFile
+import Slacker.getConfigFile
 
 function backup()
-    src = getSettingsFile()
+    src = getConfigFile()
     target = joinpath(tempdir(),"slackerbackup.json" )
     if isfile(src)
         cp(src, target, force = true)
@@ -13,7 +13,7 @@ end
 
 
 function restore()
-    src = getSettingsFile()
+    src = getConfigFile()
     target = joinpath(tempdir(),"slackerbackup.json" )
     if isfile(target)
         mv(target, src, force = true)
@@ -34,7 +34,7 @@ end
     # ensure existing configuration is not overridden
     backup()
     addConfig(SlackConfig(), "testConfig")
-    @test isfile(getSettingsFile())
+    @test isfile(getConfigFile())
 
     conf = loadConfig("testConfig")
 
@@ -56,7 +56,7 @@ end
 
 
     removeConfigFile()
-    @test !isfile(getSettingsFile())
+    @test !isfile(getConfigFile())
 
     restore()
 end
